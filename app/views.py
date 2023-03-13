@@ -3,6 +3,10 @@ from .models import ChatRoom , Chat , User
 from django.http import HttpResponse
 # Create your views here.
 def home(request , receiver):
+    try:
+        User.objects.get(username = receiver)
+    except:
+        return HttpResponse("<h1>The User you want to chat with does'nt exist</h1>")
     if not request.user.is_authenticated:
         return HttpResponse("<h1>Please Login First</h1>")
     user_pair = [request.user.username , receiver]
