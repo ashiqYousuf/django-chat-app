@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Application</title>
+    <link rel="stylesheet" href="{% static 'index.css' %}">
+</head>
+<body>
+    <div class="profile"><h4>Logged In User : {{request.user.username}}</h4></div>
+    <div id="log">
+        {% for message in messages %}
+        {% if message.username == request.user.username %}
+        <div class="chat-message-sent">
+            <div>{{message.text}}</div>
+            <div class="flexbox">
+                <small>{{message.timestamp}}</small>
+                <small class='user'>You </small>
+            </div>
+        </div>
+        {% else %}
+        <div class="chat-message-received">
+            <div>{{message.text}}</div>
+            <div class="flexbox">
+                <small>{{message.timestamp}}</small>
+                <small class='user'>{{message.username}}</small>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+    <div class="container">
+        <textarea spellcheck="false" name="" id="text"  rows="3"></textarea>
+        <button id="send">Send</button>
+    </div>
+    {{receiver|json_script:"receiver"}}
+    {{request.user.username|json_script:"sender"}}
+    <script>
+        const currentuser = JSON.parse(document.getElementById("sender").textContent);
+        const receiver = JSON.parse(document.getElementById("receiver").textContent);
+        const ws = new WebSocket(
+            'ws://' + window.location.host + '/ws/' + receiver + '/'
+        );
+        ws.addEventListener('open' , () => console.log("Connection opened"));
+        ws.addEventListener('close' , () => console.log("Connection closed"));
+        ws.addEventListener('error' , () => console.log("Connection error"));
+        
+        document.getElementById("send").addEventListener('click' , () => {
+            const messageInput = document.querySelector('#text');
+            const msg = messageInput.value;
+            messageInput.value = '';
+            if(msg.length !== 0) {
+                ws.send(JSON.stringify({"msg": msg}));
+            }else{
+                window.alert("Message can't be empty");
+            }
+        });
+
+        ws.addEventListener('message' , (event) => {
+            const data = JSON.parse(event.data);
+            const chatMessages = document.querySelector("#log");
+            const newMessageElement = document.createElement("div");
+
+            if(data.user === currentuser){
+                newMessageElement.classList.add('chat-message-sent');
+                newMessageElement.innerHTML = `
+                    <div>${data.msg}</div>
+                    <div class='flexbox'>
+                        <small>${new Date(data.timestamp).toLocaleString()}</small>
+                        <small class='user'>You</small>
+                    </div>
+                `
+            }else {
+                newMessageElement.classList.add('chat-message-received');
+                newMessageElement.innerHTML = `
+                    <div>${data.msg}</div>
+                    <div class='flexbox'>
+                        <small>${new Date(data.timestamp).toLocaleString()}</small>
+                        <small class='user'>${data.user}</small>
+                    </div>
+                `
+            }
+            chatMessages.appendChild(newMessageElement);
+            // Automatic scrolling when new data is appended to the log
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        });
+
+    </script>
+</body>
+</html>

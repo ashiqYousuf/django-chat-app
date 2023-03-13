@@ -1,0 +1,129 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+#log{
+    max-height: 60vh;
+    max-width: 70%;
+    font-weight: 300;
+    font-family: "Gill Sans", sans-serif;
+    font-size: 18px;
+    letter-spacing: 2px;
+    line-height: 25px;
+    background-color: #06394d;
+    margin: 10px auto;
+    overflow: auto;
+    padding: 50px;
+    user-select: none;
+}
+.profile{
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    height: 60px;
+    font-weight: bold;
+    text-align: center;
+}
+p{
+    margin: 0px auto;
+}
+
+#text{
+    padding: 10px;
+    margin: 5px;
+    font-weight: bold;
+}
+
+.container{
+    text-align: center;
+    width: 70%;
+    margin: 10px auto;
+    display: flex;
+    justify-content: space-between;
+}
+textarea{
+    outline: none;
+    border: 1px solid blue;
+    color: black;
+    font-weight: bold;
+    font-size: 18px;
+    border-radius: 10px;
+    padding: 20px;
+    width: 95%;
+    max-height: 35px;
+    background-color: whitesmoke;
+}
+textarea:focus{
+    box-shadow: 0px 0px 2px 2px lightblue;
+}
+body{
+    background-color: darkslategray;
+}
+button{
+    padding: 3px 10px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    color: black;
+    border-radius: 10px;
+    height: 50px;
+    width: 15%;
+    margin: auto auto;
+}
+button:hover{
+    background-color: black;
+    color: white;
+}
+.chat-message-sent {
+    margin: 20px;
+    padding: 15px;
+    border-radius: 20px;
+    background-color: lightgoldenrodyellow;
+    box-shadow: 0px 0px 1px 3px white;
+}
+.chat-message-received{
+    margin: 20px;
+    padding: 15px;
+    border-radius: 25px;
+    background-color: lightseagreen;
+    box-shadow: 0px 0px 1px 3px lightyellow;
+}
+
+/* width and height of scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+/* background of scrollbar */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* color of scrollbar handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+}
+
+/* color on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+.flexbox{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+small{
+    font-size: 12px;
+    padding: 2px;
+    margin-top: 5px;
+    color: darkslategray;
+    font-weight: 200;
+}
+.user{
+    font-weight: bold;
+    font-size: 16px;
+    color: blue;
+}
