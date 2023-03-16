@@ -30,9 +30,9 @@ To use the chat application, simply enter a username and click on the "Join Chat
 * Redis
 
 # How to Run the project
-1. Create superusers from admin panel ex: 'john' and  'tim' and Login them from different instances of your web browser
-2. If you want to make a websocket connection between them , then from ### Johns ### Interface type the URL ## '127.0.0.1:8000/chat/tim' ## implies John wants to talk to tim and from ### Tims ### interface run ##  '127.0.0.1:8000/chat/john' ##.
-3. Do not forget to run ## redis-server ##
+1. Create superusers from admin panel ex: **john** and  **tim** and Login them from different instances of your web browser
+2. If you want to make a websocket connection between them , then from **Johns** Interface type the URL **'127.0.0.1:8000/chat/tim'** implies John wants to talk to tim and from **Tims** interface run  **'127.0.0.1:8000/chat/john'**.
+3. Do not forget to run **redis-server**
 
 # Contributions
 Contributions to this project are welcome. 
